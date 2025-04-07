@@ -3,7 +3,18 @@ from geopy.distance import geodesic
 import time
 import math
 
-vehicle = connect("tcp:127.0.0.1:5762", wait_ready=True)
+connection_type = 'tcp'
+ip_address = '127.0.0.1'
+port = 5762
+
+while True:
+    try:
+        vehicle = connect(
+            f"{connection_type}:{ip_address}:{port}", wait_ready=True)
+        break
+    except Exception as e:
+        print(e)
+        time.sleep(1)
 
 
 def get_alt():
@@ -97,7 +108,7 @@ list_points.append({
     'target_alt': 100,
     'lat': 50.443326,
     'lon': 30.448078,
-    'target_distance': 4,
+    'target_distance': 2,
     'passed': False
 })
 
